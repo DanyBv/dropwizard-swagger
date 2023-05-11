@@ -26,7 +26,7 @@
 
     <groupId>com.smoketurner</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>3.0.0-1</version>
+    <version>3.0.0-2-SNAPSHOT</version>
 
     <properties>
         <jersey.version>2.39.1</jersey.version>
@@ -55,7 +55,7 @@
         <connection>scm:git:git://github.com:smoketurner/dropwizard-swagger.git</connection>
         <developerConnection>scm:git:git@github.com:smoketurner/dropwizard-swagger.git</developerConnection>
         <url>http://github.com/smoketurner/dropwizard-swagger</url>
-        <tag>v3.0.0-1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <dependencyManagement>
