@@ -1,0 +1,17 @@
+server:
+  type: default
+  applicationConnectors:
+    - type: http
+      port: 0
+  adminConnectors:
+    - type: http
+      port: 0
+swagger:
+  resourcePackage: io.federecio.dropwizard.swagger
+  servers:
+    - url: https://development.example.com/
+      description: Development server
+    - url: https://staging.example.com/v1
+      description: Staging server
+    - url: https://api.example.com/v1
+      description: Production server
