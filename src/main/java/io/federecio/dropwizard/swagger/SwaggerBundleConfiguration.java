@@ -36,7 +36,10 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.servers.Server;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.constraints.NotEmpty;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -73,6 +76,8 @@ public class SwaggerBundleConfiguration implements Cloneable {
   @Nullable private String license;
 
   @Nullable private String licenseUrl;
+
+  @Nullable private List<Server> servers;
 
   @Nullable private String customJavascript;
 
@@ -303,6 +308,17 @@ public class SwaggerBundleConfiguration implements Cloneable {
 
   @Nullable
   @JsonProperty
+  public List<Server> getServers() {
+    return servers != null ? new ArrayList<>(servers) : null;
+  }
+
+  @JsonProperty
+  public void setServers(List<Server> servers) {
+    this.servers = servers != null ? new ArrayList<>(servers) : null;
+  }
+
+  @Nullable
+  @JsonProperty
   public String getCustomJavascript() {
     return customJavascript;
   }
@@ -342,7 +358,7 @@ public class SwaggerBundleConfiguration implements Cloneable {
 
     final String[] exclusions = {SwaggerResource.PATH};
     return new SwaggerConfiguration()
-        .openAPI(oas.info(info))
+        .openAPI(oas.info(info).servers(servers))
         .prettyPrint(prettyPrint)
         .readAllResources(readAllResources)
         .ignoredRoutes(Arrays.stream(exclusions).collect(Collectors.toSet()))
