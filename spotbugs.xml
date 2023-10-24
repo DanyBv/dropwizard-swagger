@@ -15,4 +15,15 @@
     limitations under the License.
 
 -->
-<FindBugsFilter/>
+<FindBugsFilter>
+    <Match>
+        <Class name="io.federecio.dropwizard.swagger.SwaggerBundleConfiguration" />
+        <Method name="getComponents" />
+        <Bug pattern="EI_EXPOSE_REP" />
+    </Match>
+    <Match>
+        <Class name="io.federecio.dropwizard.swagger.SwaggerBundleConfiguration" />
+        <Method name="setComponents" />
+        <Bug pattern="EI_EXPOSE_REP2" />
+    </Match>
+</FindBugsFilter>

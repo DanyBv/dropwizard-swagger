@@ -32,10 +32,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Strings;
 import io.swagger.v3.oas.integration.SwaggerConfiguration;
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.servers.Server;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,6 +80,10 @@ public class SwaggerBundleConfiguration implements Cloneable {
   @Nullable private String licenseUrl;
 
   @Nullable private List<Server> servers;
+
+  @Nullable private List<SecurityRequirement> security;
+
+  @Nullable private Components components;
 
   @Nullable private String customJavascript;
 
@@ -319,6 +325,28 @@ public class SwaggerBundleConfiguration implements Cloneable {
 
   @Nullable
   @JsonProperty
+  public List<SecurityRequirement> getSecurity() {
+    return security != null ? new ArrayList<>(security) : null;
+  }
+
+  @JsonProperty
+  public void setSecurity(List<SecurityRequirement> security) {
+    this.security = security != null ? new ArrayList<>(security) : null;
+  }
+
+  @Nullable
+  @JsonProperty
+  public Components getComponents() {
+    return components;
+  }
+
+  @JsonProperty
+  public void setComponents(Components components) {
+    this.components = components;
+  }
+
+  @Nullable
+  @JsonProperty
   public String getCustomJavascript() {
     return customJavascript;
   }
@@ -358,7 +386,7 @@ public class SwaggerBundleConfiguration implements Cloneable {
 
     final String[] exclusions = {SwaggerResource.PATH};
     return new SwaggerConfiguration()
-        .openAPI(oas.info(info).servers(servers))
+        .openAPI(oas.info(info).servers(servers).security(security).components(components))
         .prettyPrint(prettyPrint)
         .readAllResources(readAllResources)
         .ignoredRoutes(Arrays.stream(exclusions).collect(Collectors.toSet()))
